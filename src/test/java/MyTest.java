@@ -48,7 +48,7 @@ public class MyTest {
         assertEquals("12345", t.getFieldDataByColumnName("dataColumn"));
 
         d.create();
-        assertEquals("INSERT INTO Table1 (dataColumn, id) VALUES (?, ?);", debugSql.get(d));
+        assertEquals("INSERT INTO Table1 (id, dataColumn) VALUES (?, ?);", debugSql.get(d));
 
         d.data = "123";
         d.save();
