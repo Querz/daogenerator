@@ -17,13 +17,13 @@ public class MyTest {
     @Test
     public void testSql() throws NoSuchFieldException, IllegalAccessException, SQLException {
         MyTestDao d = new MyTestDao();
-        Field table = d.getClass().getSuperclass().getDeclaredField("table");
+        Field table = d.getClass().getSuperclass().getDeclaredField("mTable");
         table.setAccessible(true);
 
-        Field debugSql = d.getClass().getSuperclass().getDeclaredField("debugIntermediateSql");
+        Field debugSql = d.getClass().getSuperclass().getDeclaredField("mDebugIntermediateSql");
         debugSql.setAccessible(true);
 
-        Field debugAbortAfterSql = d.getClass().getSuperclass().getDeclaredField("debugAbortAfterSql");
+        Field debugAbortAfterSql = d.getClass().getSuperclass().getDeclaredField("mDebugAbortAfterSql");
         debugAbortAfterSql.setAccessible(true);
         debugAbortAfterSql.set(d, true);
 
