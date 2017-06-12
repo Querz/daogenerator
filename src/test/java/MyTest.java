@@ -70,7 +70,7 @@ public class MyTest {
 
     @Test
     public void testMySql() throws IOException, SQLException {
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/mysql", "root", "");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/mysql", "root");
         conn.createStatement().execute("DROP SCHEMA IF EXISTS `test2`;");
         conn.createStatement().execute("CREATE SCHEMA `test2`;");
         conn.createStatement().execute("USE `test2`;");
