@@ -9,8 +9,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Properties;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class MyTest {
 
@@ -70,18 +72,22 @@ public class MyTest {
 
     @Test
     public void testMySql() throws IOException, SQLException {
-        Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/mysql", "root", "");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/mysql?user=root");
+        if(!conn.isValid(10)) {
+            System.err.println("mysql connection failed!");
+            fail();
+        }
         conn.createStatement().execute("DROP SCHEMA IF EXISTS `test2`;");
         conn.createStatement().execute("CREATE SCHEMA `test2`;");
         conn.createStatement().execute("USE `test2`;");
-        conn.createStatement().execute("DROP TABLE IF EXISTS `table1`;");
-        conn.createStatement().execute("CREATE TABLE `table1` (\n" +
+        conn.createStatement().execute("DROP TABLE IF EXISTS `Table1`;");
+        conn.createStatement().execute("CREATE TABLE `Table1` (\n" +
                 "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
                 "  `dataColumn` varchar(45) DEFAULT NULL,\n" +
                 "  PRIMARY KEY (`id`)\n" +
                 ") ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;");
-        conn.createStatement().execute("ALTER TABLE table1 AUTO_INCREMENT = 1;");
-        conn.createStatement().execute("CREATE TABLE `test2`.`table2` (\n" +
+        conn.createStatement().execute("ALTER TABLE Table1 AUTO_INCREMENT = 1;");
+        conn.createStatement().execute("CREATE TABLE `test2`.`Table2` (\n" +
                 "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
                 "  `data1` VARCHAR(45) NULL,\n" +
                 "  `data2` VARCHAR(45) NULL,\n" +
@@ -89,7 +95,7 @@ public class MyTest {
                 "  `id2` VARCHAR(45) NOT NULL,\n" +
                 "  `data4` VARCHAR(45) NULL,\n" +
                 "  PRIMARY KEY (`id`, `id2`));\n");
-        conn.createStatement().execute("ALTER TABLE table2 AUTO_INCREMENT = 1;");
+        conn.createStatement().execute("ALTER TABLE Table2 AUTO_INCREMENT = 1;");
 
         MyTestDao d = new MyTestDao();
         d.withConnection(conn);

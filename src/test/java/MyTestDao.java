@@ -5,7 +5,7 @@ import net.dckg.daogenerator.Table;
 
 import java.sql.Types;
 
-@Table(name="table1")
+@Table(name="Table1")
 public class MyTestDao extends Dao implements Comparable<MyTestDao> {
 
     @Column(name = "id", type = Types.INTEGER)

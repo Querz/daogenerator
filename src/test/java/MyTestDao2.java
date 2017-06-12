@@ -5,7 +5,7 @@ import net.dckg.daogenerator.Table;
 
 import java.sql.Types;
 
-@Table(name="table2")
+@Table(name="Table2")
 public class MyTestDao2 extends Dao {
 
     @Column(name = "id", type= Types.INTEGER)
